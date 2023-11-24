@@ -5,4 +5,4 @@ Zasada działania:
 Program działa przez rejestrację i monitorowanie wcześniej zdefiniowanych kombinacji klawiszy. Gdy użytkownik naciśnie taką kombinację, program uruchamia przypisany do niej program.
 
 Integracja z użytkownikiem:
-Program "Binder" integruje się z użytkownikiem poprzez dostarczenie interfejsu graficznego użytkownika umożliwiającego konfigurację kombinacji klawiszy i przypisywanie ich do programów. Dzięki temu użytkownicy mogą dostosować działanie aplikacji do swoich potrzeb w prosty i intuicyjny sposób.
+Program "Binder" integruje się z użytkownikiem poprzez dostarczenie interfejsu użytkownika umożliwiającego konfigurację kombinacji klawiszy i przypisywanie ich do programów. Dzięki temu użytkownicy mogą dostosować działanie aplikacji do swoich potrzeb w prosty i intuicyjny sposób.
