@@ -1,10 +1,17 @@
-Cel aplikacji:
-Program "Binder" służy do umożliwienia użytkownikom uruchomienia określonego programu/aplikacji na swoim komputerze za pomocą określonej kombinacji klawiszy na klawiaturze.
+#**Binder Program Documentation**
+**Application Purpose:**
+The "Binder" program enables users to launch specific applications on their computer using selected key combinations on their keyboard.
 
-Zasada działania:
-Program działa przez rejestrację i monitorowanie wcześniej zdefiniowanych kombinacji klawiszy. Gdy użytkownik naciśnie taką kombinację, program uruchamia przypisany do niej program.
+**How It Works:**
+The Binder program operates by registering and monitoring predefined key combinations. When an user selects a combination, the program opens the assigned application.
 
-Integracja z użytkownikiem:
-Program "Binder" integruje się z użytkownikiem poprzez dostarczenie interfejsu użytkownika umożliwiającego konfigurację kombinacji klawiszy i przypisywanie ich do programów. Dzięki temu użytkownicy mogą dostosować działanie aplikacji do swoich potrzeb w prosty i szybki sposób.
+**User Interaction:**
+Binder provides users with a user-friendly interface for configuring key combinations and assigning them to apps. This allows users to easily customize the application's behavior to suit their needs.
 
-Binder jest narazie limitowany do aplikacji podstawowych lub głównie tych, co znajdują się w dysku C. Planujemy dalsze rozwinięcie aplikacji poprzez dodawanie nowych, ekscytujących możliwości dla wygody użytkownika.
+##**More Features**
+Password Protection: Users can now set passwords for assigned key combinations, providing additional security.
+User Notifications: Implementation of notifications for users informing them of success or any issues encountered during application launches.
+Settings Cleanup: Addition of a settings cleanup feature allowing users to remove all previously configured key combinations and go back to default settings.
+
+**Limitations**
+At present, Binder is limited to basic applications, primarily those located on the C drive. We plan to expand the application by adding new features to provide users with even greater convenience.
