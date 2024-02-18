@@ -1,4 +1,4 @@
-#**Binder Program Documentation**
+# **Binder Program Documentation**
 **Application Purpose:**
 The "Binder" program enables users to launch specific applications on their computer using selected key combinations on their keyboard.
 
@@ -8,7 +8,7 @@ The Binder program operates by registering and monitoring predefined key combina
 **User Interaction:**
 Binder provides users with a user-friendly interface for configuring key combinations and assigning them to apps. This allows users to easily customize the application's behavior to suit their needs.
 
-##**More Features**
+# **More Features**
 Password Protection: Users can now set passwords for assigned key combinations, providing additional security.
 User Notifications: Implementation of notifications for users informing them of success or any issues encountered during application launches.
 Settings Cleanup: Addition of a settings cleanup feature allowing users to remove all previously configured key combinations and go back to default settings.
