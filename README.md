@@ -21,3 +21,9 @@ Settings Cleanup: Addition of a settings cleanup feature allowing users to remov
 
 **Limitations**
 At present, Binder is limited to basic applications, primarily those located on the C drive. We plan to expand the application by adding new features to provide users with even greater convenience.
+
+
+
+# **Testing**
+
+I have done testing the application by its functionality and it works perfectly with some additional tweaks added by me. Tested stuff such as saving hotkeys, starting apps and the password and cleaning system.
