@@ -27,3 +27,5 @@ At present, Binder is limited to basic applications, primarily those located on 
 # **Testing**
 
 I have done testing the application by its functionality and it works perfectly with some additional tweaks added by me. Tested stuff such as saving hotkeys, starting apps and the password and cleaning system.
+
+*I also done some debugging and came across a bug that does not let you open an app after setting the keybind, should be all fixed now by adding the subprocess possibility.
