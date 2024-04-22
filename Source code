@@ -1,0 +1,144 @@
+import json
+import tkinter as tk
+from tkinter import messagebox, filedialog
+import keyboard
+import subprocess
+
+class BinderApp(tk.Tk):
+    def __init__(self):
+        super().__init__()
+        self.title("Binder")
+        self.geometry("400x300")
+        self.configure(bg="#B6FDFF")
+        self.setup_ui()
+        self.hotkeys = self.load_settings().get("hotkeys", {})
+        self.setup_hotkeys()
+
+    def setup_ui(self):
+        title_frame = tk.Frame(self, bg="#B6FDFF", pady=10)
+        title_frame.pack(fill=tk.X)
+
+        self.title_label = tk.Label(title_frame, text="Binder", font=("Arial", 24, "bold"), bg="#B6FDFF", fg="black")
+        self.title_label.pack()
+
+        self.open_app_button = tk.Button(self, text="Open Application", font=("Arial", 13, "bold"),command=self.open_application, bg="#4CF0FF", fg="black")
+        self.open_app_button.pack(pady=10, padx=20, fill=tk.X)
+
+        self.add_hotkeys_button = tk.Button(self, text="Add Hotkeys", font=("Arial", 13, "bold"),command=self.add_hotkeys, bg="#4CD9FF", fg="black")
+        self.add_hotkeys_button.pack(pady=10, padx=20, fill=tk.X)
+
+        self.show_hotkeys_button = tk.Button(self, text="Show Current Keybinds", font=("Arial", 13, "bold"),command=self.show_hotkeys, bg="#4CB7FF", fg="black")
+        self.show_hotkeys_button.pack(pady=10, padx=20, fill=tk.X)
+
+        self.clean_settings_button = tk.Button(self, text="Clean Settings", font=("Arial", 13, "bold"),command=self.clean_settings, bg="#33A0FD", fg="black")
+        self.clean_settings_button.pack(pady=10, padx=20, fill=tk.X)
+
+        self.exit_button = tk.Button(self, text="Exit", font=("Arial", 13, "bold"),command=self.exit_app, bg="#607D8B", fg="white")
+        self.exit_button.pack(pady=2, padx=120, fill=tk.X)
+
+    def open_application(self):
+        messagebox.showinfo("Info", "Press the configured hotkeys to open the application.")
+
+    def add_hotkeys(self):
+        hotkey_dialog = HotkeyDialog(self)
+        self.wait_window(hotkey_dialog)
+        self.hotkeys = self.load_settings().get("hotkeys", {})
+        self.setup_hotkeys()
+
+    def show_hotkeys(self):
+        hotkeys_str = "\n".join([f"{key}: {value}" for key, value in self.hotkeys.items()])
+        messagebox.showinfo("Current Keybinds", hotkeys_str)
+
+    def clean_settings(self):
+        if messagebox.askyesno("Clean Settings", "Are you sure you want to clean all settings? This action cannot be undone."):
+            self.save_settings({})
+            self.hotkeys = self.load_settings().get("hotkeys", {})
+            self.setup_hotkeys()
+            messagebox.showinfo("Clean Settings", "Settings cleaned successfully.")
+
+    def save_settings(self, settings):
+        with open("settings.json", 'w') as f:
+            json.dump(settings, f)
+
+    def load_settings(self):
+        try:
+            with open("settings.json", 'r') as f:
+                return json.load(f)
+        except FileNotFoundError:
+            return {}
+
+    def exit_app(self):
+        if messagebox.askyesno("Exit", "Are you sure you want to exit?"):
+            self.destroy()
+
+    def setup_hotkeys(self):
+        keyboard.unhook_all()  # Unhook all previously registered hotkeys
+        for hotkey, app_path in self.hotkeys.items():
+            keyboard.add_hotkey(hotkey, self.open_app, args=(app_path,))
+            print(f"Hotkey set: {hotkey} -> {app_path}")
+
+    def open_app(self, app_path):
+        try:
+            subprocess.Popen(app_path, shell=True, creationflags=subprocess.CREATE_NO_WINDOW)
+            print(f"App opened: {app_path}")
+        except FileNotFoundError:
+            print(f"Invalid app path: {app_path}")
+
+
+class HotkeyDialog(tk.Toplevel):
+    def __init__(self, parent):
+        super().__init__(parent)
+        self.title("Add Hotkeys")
+        self.geometry("300x200")
+        self.configure(bg="#4CD9FF")
+        self.parent = parent
+        self.hotkeys = {}
+        self.setup_ui()
+
+    def setup_ui(self):
+        title_frame = tk.Frame(self, bg="#4CAF50", pady=10)
+        title_frame.pack(fill=tk.X)
+
+        title_label = tk.Label(title_frame, text="Add Hotkeys", font=("Arial", 16), bg="#4CAF50", fg="white")
+        title_label.pack()
+
+        self.hotkey_label = tk.Label(self, text="Hotkey:", bg="#f0f0f0")
+        self.hotkey_label.pack(pady=10)
+
+        self.hotkey_entry = tk.Entry(self)
+        self.hotkey_entry.pack(pady=5)
+
+        self.app_button = tk.Button(self, text="Select Application", command=self.select_application, bg="#2196F3", fg="white")
+        self.app_button.pack(pady=5)
+
+        self.add_button = tk.Button(self, text="Add Hotkey", command=self.add_hotkey, bg="#4CAF50", fg="white")
+        self.add_button.pack(pady=10)
+
+    def select_application(self):
+        app_path = filedialog.askopenfilename(title="Select Application", filetypes=[("Executable files", "*.exe")])
+        if app_path:
+            messagebox.showinfo("Selected Application", f"Selected Application: {app_path}")
+            self.app_path = app_path
+
+    def add_hotkey(self):
+        hotkey = self.hotkey_entry.get()
+        if hotkey:
+            self.hotkeys[hotkey] = self.app_path
+            self.hotkey_entry.delete(0, tk.END)
+            messagebox.showinfo("Success", "Hotkey added successfully.")
+
+    def destroy(self):
+        self.save_hotkeys_to_settings()
+        super().destroy()
+
+    def save_hotkeys_to_settings(self):
+        settings = self.parent.load_settings()
+        hotkeys = settings.get("hotkeys", {})
+        hotkeys.update(self.hotkeys)
+        settings["hotkeys"] = hotkeys
+        self.parent.save_settings(settings)
+
+
+if __name__ == "__main__":
+    app = BinderApp()
+    app.mainloop()
