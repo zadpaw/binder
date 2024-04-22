@@ -20,7 +20,7 @@ Settings Cleanup: Addition of a settings cleanup feature allowing users to remov
 
 
 **Limitations**
-At present, Binder is limited to basic applications, primarily those located on the C drive. We plan to expand the application by adding new features to provide users with even greater convenience.
+Binder is no longer limited to applications located only on the C drive, now, it prompts up a file explorer in which you can choose almost any application youve got saved!
 
 
 
