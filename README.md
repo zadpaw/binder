@@ -29,3 +29,7 @@ Binder is no longer limited to applications located only on the C drive, now, it
 I have done testing the application by its functionality and it works perfectly with some additional tweaks added by me. Tested stuff such as saving hotkeys, starting apps and the password and cleaning system.
 
 *I also done some debugging and came across a bug that does not let you open an app after setting the keybind, should be all fixed now by adding the subprocess possibility.
+
+
+
+Note: You should create a seperate folder on your desktop so that you can acces the settings file easier.
